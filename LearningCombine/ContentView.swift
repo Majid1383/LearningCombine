@@ -8,14 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject private var searchViewModel : ServiceViewModel = ServiceViewModel()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        
+        VStack{
+            
+            TextField("Search...",
+                      text: $searchViewModel.searchText)
+            .textFieldStyle(.roundedBorder)
+            .padding()
+            
+            Text(searchViewModel.statusMessage)
+                .foregroundColor(
+                    searchViewModel.isValidSearch ? .green : .red
+                )
+            
+            Spacer()
         }
-        .padding()
     }
 }
 
